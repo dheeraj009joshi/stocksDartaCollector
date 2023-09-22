@@ -48,10 +48,7 @@ def get_interest(keyword, start, end):
     try:
         f=open('combine.csv',"a")
         proxies = []
-        # main_url = "http://gate.smartproxy.com:"
-        # for index in range(10000, 10009):
-        #     proxies.append(main_url + str(index))
-        
+         
         print(start, end)
         
         proxy = f"http://{username}:{password}@gate.smartproxy.com:10000"
@@ -60,7 +57,7 @@ def get_interest(keyword, start, end):
         historical_interest = pytrends.interest_over_time()
         df=pd.DataFrame(historical_interest)
         df.to_csv("data.csv")
-        print(df)
+        # print(df)
         print(len(df))
         return df
         # df.to_csv(f"all_csv/{keyword}_data.csv")
@@ -69,9 +66,9 @@ def get_interest(keyword, start, end):
 
 if __name__ == '__main__':
     f=open('combine.csv',"a")
-    # data=pd.read_csv("nasdaq-listed.csv").head(1000)
-    # kw_list = data['Symbol']
-    kw_list = ['AAPL','MSFT','GOOG','GOOGL','AMZN','NVDA','BRK/B','TSLA','META','HSBC']
+    data=pd.read_csv("selected_stocks.csv").head(1000)
+    kw_list = data['Symbol']
+    # kw_list = ['AAPL','MSFT','GOOG','GOOGL','AMZN','NVDA','BRK/B','TSLA','META','HSBC']
     
     processes = []
     time=get_time()
@@ -81,6 +78,7 @@ if __name__ == '__main__':
     No_process = 1
 
     for keyword in kw_list:
+      
         print(f"Trying to get data for {keyword} - Process {No_process}")
         try:
             t__=0
